@@ -22,6 +22,14 @@ def get_form_by_slug(db: Session, slug: str) -> Optional[Form]:
 
 
 def create_form(db: Session, form_in: FormCreate, creator_id: int = 1) -> Form:
+    # Ensure creator exists to prevent foreign key constraint errors
+    from app.models.creator import Creator
+    creator = db.query(Creator).filter(Creator.id == creator_id).first()
+    if not creator:
+        new_creator = Creator(id=creator_id, name="Demo Creator", email="demo@example.com")
+        db.add(new_creator)
+        db.commit()
+
     form = Form(
         creator_id=creator_id,
         title=form_in.title or "Untitled form",
