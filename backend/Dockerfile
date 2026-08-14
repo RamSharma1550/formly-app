@@ -13,5 +13,5 @@ COPY . .
 ENV PORT=8000
 EXPOSE ${PORT}
 
-# Use shell form so $PORT is expanded at runtime
-CMD uvicorn app.main:app --host 0.0.0.0 --port $PORT
+# Use explicit sh -c to ensure $PORT is expanded at runtime
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
