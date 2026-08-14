@@ -1,9 +1,6 @@
 {
-  "buildCommand": "npm install",
+  "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "framework": "nextjs",
-  "installCommand": "npm install",
-  "env": {
-    "NEXT_PUBLIC_API_URL": "https://your-backend.railway.app"
-  }
+  "installCommand": "npm install"
 }
